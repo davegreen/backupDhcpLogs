@@ -1,4 +1,4 @@
-Readme - backupDHCPLogs
+Readme - backupDhcpLogs
 ====================
 
 Description
@@ -9,7 +9,7 @@ This module requires [PowerShell v3](http://www.microsoft.com/en-gb/download/det
 
 ### Features
 
-- Backs DHCP logs from the previous day.
+- Backs DHCP logs from previous days.
 - Ability to backup the DHCP server configuration.
 
 ### To Do
@@ -25,18 +25,22 @@ By default, PowerShell will not let you run unsigned modules and scripts and wil
 
 > Set-ExecutionPolicy RemoteSigned
 
+Copy the module files (BackupDhcpLogs.psm1, BackupDhcpLogs.psd1) into the following directory:
+
+> C:\Users\USERNAME\Documents\WindowsPowerShell\Modules\BackupDhcpLogs\
+
 Usage
 ---------------------
 
 ### Example 1
 
-> C:\PS>Backup-DHCPLogs -Destination "C:\Destination\Folder"
+> C:\PS>Backup-DhcpLogs -Destination "C:\Destination\Folder"
 
 Backs up the DHCP logs to 'C:\Destination\Folder'
 
 ### Example 2
 
-> C:\PS>Backup-DHCPLogs -Destination "C:\Destination\Folder" -RetentionDays 180
+> C:\PS>Backup-DhcpLogs -Destination "C:\Destination\Folder" -RetentionDays 180
 
 Backs up the DHCP logs to 'C:\Destination\Folder' and will delete old logs of the form 'DhcpSrvLog*' or
 'DhcpV6SrvLog*' when they are older than 180 days.
