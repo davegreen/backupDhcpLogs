@@ -28,6 +28,18 @@ By default, PowerShell will not let you run unsigned modules and scripts and wil
 Usage
 ---------------------
 
+### Example 1
+
+> C:\PS>Backup-DHCPLogs -Destination "C:\Destination\Folder"
+
+Backs up the DHCP logs to 'C:\Destination\Folder'
+
+### Example 2
+
+> C:\PS>Backup-DHCPLogs -Destination "C:\Destination\Folder" -RetentionDays 180
+
+Backs up the DHCP logs to 'C:\Destination\Folder' and will delete old logs of the form 'DhcpSrvLog*' or
+'DhcpV6SrvLog*' when they are older than 180 days.
 
 Contact
 ---------------------
