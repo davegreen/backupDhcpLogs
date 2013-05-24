@@ -42,12 +42,6 @@
     [switch]$BackupConfig
   )
 
-  $check = Get-WindowsFeature | Where-Object {$_.Name -eq "DHCP"}
-  if(!($check.Installed))
-  {
-    Throw "This function must be run on a server operating system with a DHCP server installed."
-  }
-
   $yday = (Get-Date (Get-Date).AddDays(-1))
   $ydayiso8601 = (Get-Date $yday -format yyyy-MM-dd)
   $tdayiso8601 = (Get-Date -format yyyy-MM-dd)
