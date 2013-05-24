@@ -1,4 +1,4 @@
-﻿Function Backup-DHCPLogs()
+Function Backup-DhcpLogs()
 {
   <# 
     .Synopsis
@@ -17,15 +17,15 @@
     Optional. DHCP server configuration will also be backed up if you include this parameter.
 
     .Example
-    Backup-DHCPLogs -Destination "C:\Destination\Folder"
+    Backup-DhcpLogs -Destination "C:\Destination\Folder"
     Backs up the DHCP logs to 'C:\Destination\Folder'
 
     .Example
-    Backup-DHCPLogs -Destination "C:\Destination\Folder" -RetentionDays 180
+    Backup-DhcpLogs -Destination "C:\Destination\Folder" -RetentionDays 180
     Backs up the DHCP logs to 'C:\Destination\Folder' and will delete old logs of the form 'DhcpSrvLog*' or 'DhcpV6SrvLog*' when they are older than 180 days.
         
     .Notes
-    Name  : Backup-DHCPLogs
+    Name  : Backup-DhcpLogs
     Author: David Green
     Date  : 23/05/2013
 
@@ -42,13 +42,9 @@
     [switch]$BackupConfig
   )
 
-  $yday = (Get-Date (Get-Date).AddDays(-1))
-  $ydayiso8601 = (Get-Date $yday -format yyyy-MM-dd)
-  $tdayiso8601 = (Get-Date -format yyyy-MM-dd)
-
   if(Test-Path -Path "C:\Windows\System32\dhcp\")
   {
-    $logfiles = Get-ChildItem -File -Path "C:\Windows\System32\dhcp\" | Where-Object { $_.Extension -eq ".log" }
+    $logfiles = Get-ChildItem -File -Path "C:\Windows\System32\dhcp\" | Where-Object { $_.Extension -eq ".log" -and $_.Name.StartsWith("Dhcp") -and $_.LastAccessTime -lt (Get-Date).Date }
   }
 
   else
@@ -58,18 +54,16 @@
 
   foreach($log in $logfiles)
   {
-    if($log.name.Contains($yday.DayOfWeek.ToString().Substring(0, 3)))
+    $date = (Get-Date ($log.LastWriteTime) -format yyyy-MM-dd)
+    Try
     {
-      Try
-      {
-        Copy-Item ($log.DirectoryName + "\$log") ("$Destination\$ydayiso8601-" + $log.Name)
-        Write-Output ("Copied " + ($log.DirectoryName + "\$log") + " to $Destination\$ydayiso8601-" + $log.Name)
-      }
-
-      Catch
-      {
-        Throw "Error: $_"
-      }
+      Copy-Item ($log.DirectoryName + "\$log") ("$Destination\$date-" + $log.Name)
+      Write-Output ("Copied " + ($log.DirectoryName + "\$log") + " to $Destination\$date-" + $log.Name)
+    }
+    
+    Catch
+    {
+      Throw "Error: $_"
     }
   }
   
@@ -77,13 +71,15 @@
   {
     Try
     {
+      $tdayiso8601 = (Get-Date -format yyyy-MM-dd)
+      
       #Dump DHCP database
       netsh dhcp dump > ("$Destination\DhcpSrvDump-$tdayiso8601.txt")
       Write-Output "Dumped DHCP server configuration to $Destination\DhcpSrvDump-$tdayiso8601.txt"
 
       #It may be better to back up the DHCP database and configuration using
-      #Backup-DHCPServer or
-      #Export-DHCPServer
+      #Backup-DhcpServer or
+      #Export-DhcpServer
     }
 
     Catch
