@@ -49,6 +49,10 @@ Backs up the DHCP logs to 'C:\Destination\Folder'
 Backs up the DHCP logs to 'C:\Destination\Folder' and will delete old logs of the form 'DhcpSrvLog*' or
 'DhcpV6SrvLog*' when they are older than 180 days.
 
+If you are running this using the task scheduler, this can be done easily using the following command:
+
+> powershell.exe -command &{Backup-DhcpLogs -Destination 'C:\Destination\Folder\DHCP' -RetentionDays 180}
+
 Contact
 ---------------------
 
