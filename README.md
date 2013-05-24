@@ -5,7 +5,6 @@ Description
 ---------------------
 
 A PowerShell module that provides an easy way to backup and manage DHCP logs and configuration.
-This module requires [PowerShell v3](http://www.microsoft.com/en-gb/download/details.aspx?id=34595) from Microsoft.
 
 ### Features
 
@@ -18,6 +17,9 @@ This module requires [PowerShell v3](http://www.microsoft.com/en-gb/download/det
 
 Setting Up
 ---------------------
+
+This module requires [PowerShell v3](http://www.microsoft.com/en-gb/download/details.aspx?id=34595) from Microsoft. 
+If you are running Windows Server 2012 - congratulations, it's already installed!
 
 ### [Enabling scripts in PowerShell](http://technet.microsoft.com/en-us/library/hh849812.aspx)
 
