@@ -14,6 +14,7 @@ A PowerShell module that provides an easy way to backup and manage DHCP logs and
 ### To Do
 
 - Add full backup of all logs.
+- Remote backup.
 - Add check for the DHCP Server Windows feature.
 - Back up the configuration using something like Backup-DhcpServer or Export-DhcpServer instead of netsh.
 
