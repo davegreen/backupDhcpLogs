@@ -54,11 +54,11 @@ Function Backup-DhcpLogs()
 
   foreach($log in $logfiles)
   {
-    $date = (Get-Date ($log.LastWriteTime) -format yyyy-MM-dd)
+    $filedate = (Get-Date ($log.LastWriteTime) -format yyyy-MM-dd)
     Try
     {
-      Copy-Item ($log.DirectoryName + "\$log") ("$Destination\$date-" + $log.Name)
-      Write-Output ("Copied " + ($log.DirectoryName + "\$log") + " to $Destination\$date-" + $log.Name)
+      Copy-Item ($log.DirectoryName + "\$log") ("$Destination\$filedate-" + $log.Name)
+      Write-Output ("Copied " + ($log.DirectoryName + "\$log") + " to $Destination\$filedate-" + $log.Name)
     }
     
     Catch
@@ -71,11 +71,11 @@ Function Backup-DhcpLogs()
   {
     Try
     {
-      $tdayiso8601 = (Get-Date -format yyyy-MM-dd)
+      $iso8601date = (Get-Date -format yyyy-MM-dd)
       
       #Dump DHCP database
-      netsh dhcp dump > ("$Destination\DhcpSrvDump-$tdayiso8601.txt")
-      Write-Output "Dumped DHCP server configuration to $Destination\DhcpSrvDump-$tdayiso8601.txt"
+      netsh dhcp dump > ("$Destination\DhcpSrvDump-$iso8601date.txt")
+      Write-Output "Dumped DHCP server configuration to $Destination\DhcpSrvDump-$iso8601date.txt"
 
       #It may be better to back up the DHCP database and configuration using
       #Backup-DhcpServer or
