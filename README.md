@@ -32,7 +32,7 @@ By default, PowerShell will not let you run unsigned modules and scripts and wil
 
 Copy the module files (BackupDhcpLogs.psm1, BackupDhcpLogs.psd1) into the following directory:
 
-> C:\Users\USERNAME\Documents\WindowsPowerShell\Modules\BackupDhcpLogs\
+> %HOMEPATH%\Documents\WindowsPowerShell\Modules\BackupDhcpLogs\
 
 Usage
 ---------------------
@@ -41,7 +41,7 @@ Usage
 
 > C:\PS>Backup-DhcpLogs -Destination "C:\Destination\Folder"
 
-Backs up the DHCP logs to 'C:\Destination\Folder'
+Backs up the DHCP logs to 'C:\Destination\Folder'.
 
 ### Example 2
 
@@ -50,7 +50,7 @@ Backs up the DHCP logs to 'C:\Destination\Folder'
 Backs up the DHCP logs to 'C:\Destination\Folder' and will delete old logs of the form 'DhcpSrvLog*' or
 'DhcpV6SrvLog*' when they are older than 180 days.
 
-If you are running this using the task scheduler, this can be done easily using the following command:
+If you are running this using the task scheduler, this can be done easily using the following command as the action:
 
 > powershell.exe -command &{Backup-DhcpLogs -Destination 'C:\Destination\Folder\DHCP' -RetentionDays 180}
 
