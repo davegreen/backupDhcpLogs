@@ -27,9 +27,6 @@ Function Backup-DhcpLogs()
     .Notes
     Name  : Backup-DhcpLogs
     Author: David Green
-    Date  : 23/05/2013
-
-    Requires PowerShell Version 3 or later.
     
     .Link
     http://www.tookitaway.co.uk
