@@ -55,7 +55,7 @@ Function Backup-DhcpLogs()
     Try
     {
       Copy-Item ($log.DirectoryName + "\$log") ("$Destination\$filedate-" + $log.Name)
-      Write-Output ("Copied " + ($log.DirectoryName + "\$log") + " to $Destination\$filedate-" + $log.Name)
+      Write-Output "Copied $($log.DirectoryName)\$log to $Destination\$filedate-$($log.Name)"
     }
     
     Catch
@@ -98,7 +98,7 @@ Function Backup-DhcpLogs()
         Try
         {
           Remove-Item ($file.DirectoryName + "\$file")
-          Write-Output ("Deleted $file from " + $file.DirectoryName)
+          Write-Output "Deleted $file from $($file.DirectoryName)"
         }
 
         Catch
