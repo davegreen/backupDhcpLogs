@@ -34,9 +34,11 @@ Function Backup-DhcpLogs()
 
   [CmdletBinding()]
   Param(
-    [Parameter(Mandatory=$true, Position=1, HelpMessage="The destination folder to back up the logs (and optionally, the configuration) to.")][string]$Destination,
-    [string]$RetentionDays,
-    [switch]$BackupConfig
+    [Parameter(Mandatory=$true, Position=1, HelpMessage="The destination folder to back up the logs (and optionally, the configuration) to.")]
+      [validatescript({Test-Path $_ -PathType Container -eq $true})]
+      [string]$Destination,
+    [parameter()][string]$RetentionDays,
+    [parameter()][switch]$BackupConfig
   )
 
   if(Test-Path -Path "C:\Windows\System32\dhcp\")
