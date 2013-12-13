@@ -1,4 +1,4 @@
-Readme - backupDhcpLogs
+backupDhcpLogs
 ====================
 
 Description
